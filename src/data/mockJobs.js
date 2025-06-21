@@ -1,0 +1,122 @@
+export const mockJobs = [
+  {
+    id: '1',
+    title: 'Senior Frontend Developer',
+    company: 'TechGiant',
+    location: 'San Francisco, CA',
+    type: 'Full-time',
+    salary: '$120,000 - $150,000',
+    description: 'We are looking for an experienced Frontend Developer to join our team. You will be responsible for building user interfaces and implementing web applications using React, TypeScript, and modern frontend technologies.',
+    tags: ['React', 'TypeScript', 'Redux', 'Tailwind CSS'],
+    postedDate: '2 days ago',
+    featured: true
+  },
+  {
+    id: '2',
+    title: 'Data Scientist',
+    company: 'AnalyticsPro',
+    location: 'Remote',
+    type: 'Full-time',
+    salary: '$110,000 - $140,000',
+    description: 'Join our data science team to develop machine learning models and data-driven solutions. You will work with large datasets to extract insights and build predictive models that drive business decisions.',
+    tags: ['Python', 'Machine Learning', 'SQL', 'Data Analysis'],
+    postedDate: '3 days ago',
+    featured: true
+  },
+  {
+    id: '3',
+    title: 'Product Manager',
+    company: 'InnovateLabs',
+    location: 'New York, NY',
+    type: 'Full-time',
+    salary: '$130,000 - $160,000',
+    description: 'We are seeking a Product Manager to lead the development of our SaaS platform. You will work closely with engineering, design, and marketing teams to define product vision, strategy, and roadmap.',
+    tags: ['Product Strategy', 'Agile', 'SaaS', 'User Research'],
+    postedDate: '1 week ago',
+    featured: true
+  },
+  {
+    id: '4',
+    title: 'DevOps Engineer',
+    company: 'CloudWorks',
+    location: 'Seattle, WA',
+    type: 'Full-time',
+    salary: '$125,000 - $155,000',
+    description: 'As a DevOps Engineer, you will build and maintain our cloud infrastructure, implement CI/CD pipelines, and ensure the reliability and performance of our production systems.',
+    tags: ['AWS', 'Kubernetes', 'Docker', 'CI/CD'],
+    postedDate: '5 days ago',
+    featured: false
+  },
+  {
+    id: '5',
+    title: 'UI/UX Designer',
+    company: 'DesignHub',
+    location: 'Los Angeles, CA',
+    type: 'Full-time',
+    salary: '$90,000 - $120,000',
+    description: 'Join our design team to create beautiful, intuitive user interfaces and experiences. You will collaborate with product managers and developers to bring designs to life.',
+    tags: ['Figma', 'User Research', 'Prototyping', 'Design Systems'],
+    postedDate: '1 week ago',
+    featured: true
+  },
+  {
+    id: '6',
+    title: 'Backend Developer',
+    company: 'ServerTech',
+    location: 'Austin, TX',
+    type: 'Full-time',
+    salary: '$115,000 - $145,000',
+    description: 'We are looking for a skilled Backend Developer proficient in Node.js and API development. You will design and implement scalable services that power our applications.',
+    tags: ['Node.js', 'Express', 'MongoDB', 'API Design'],
+    postedDate: '4 days ago',
+    featured: false
+  },
+  {
+    id: '7',
+    title: 'Marketing Specialist',
+    company: 'GrowthBoost',
+    location: 'Chicago, IL',
+    type: 'Full-time',
+    salary: '$70,000 - $90,000',
+    description: 'Join our marketing team to develop and execute strategies that drive user acquisition and engagement. You will manage campaigns across various channels and analyze performance metrics.',
+    tags: ['Digital Marketing', 'SEO', 'Content Strategy', 'Analytics'],
+    postedDate: '2 weeks ago',
+    featured: false
+  },
+  {
+    id: '8',
+    title: 'Fullstack Developer',
+    company: 'CodeCraft',
+    location: 'Remote',
+    type: 'Contract',
+    salary: '$100,000 - $130,000',
+    description: 'We need a versatile Fullstack Developer who can work across the entire application stack. You will develop features from database to user interface and ensure high performance and responsiveness.',
+    tags: ['JavaScript', 'React', 'Node.js', 'PostgreSQL'],
+    postedDate: '1 week ago',
+    featured: true
+  },
+  {
+    id: '9',
+    title: 'Project Manager',
+    company: 'GlobalTech',
+    location: 'Denver, CO',
+    type: 'Full-time',
+    salary: '$95,000 - $125,000',
+    description: 'As a Project Manager, you will plan, execute, and close projects on time and within budget. You will coordinate teams, manage resources, and ensure project deliverables meet quality standards.',
+    tags: ['Project Planning', 'Agile', 'Team Leadership', 'Stakeholder Management'],
+    postedDate: '3 days ago',
+    featured: false
+  },
+  {
+    id: '10',
+    title: 'Machine Learning Engineer',
+    company: 'AI Innovate',
+    location: 'Boston, MA',
+    type: 'Full-time',
+    salary: '$140,000 - $180,000',
+    description: 'Join our AI team to develop and deploy machine learning models that solve complex business problems. You will work on cutting-edge ML technologies and implement scalable solutions.',
+    tags: ['TensorFlow', 'PyTorch', 'NLP', 'Computer Vision'],
+    postedDate: '1 week ago',
+    featured: true
+  }
+];
