@@ -22,6 +22,7 @@ export const TextInputControl = ({
   errorMessage = "This field is required.",
   className = "",
   inputClassName = "",
+  labelClassName = "",
   touched,
   errors,
   readOnly = false,
@@ -38,7 +39,9 @@ export const TextInputControl = ({
       {label && (
         <label
           htmlFor={id}
-          className="block text-sm font-medium text-gray-700 "
+          className={
+            "block text-sm font-medium text-gray-700 " + labelClassName
+          }
         >
           {displayLabel}
         </label>
@@ -100,6 +103,8 @@ export const ValueSelecterControl = ({
   touched,
   errors,
   disabled = false,
+  labelClassName = "",
+  optionsClassName = "",
 }) => {
   const displayLabel = ENABLE_TRANSLATION
     ? TranslationService.translate(translate_key, { defaultValue: label })
@@ -108,7 +113,10 @@ export const ValueSelecterControl = ({
   return (
     <div className={cn("mb-4 text-start", className)}>
       {label && (
-        <label htmlFor={id} className="block text-sm font-medium text-gray-700">
+        <label
+          htmlFor={id}
+          className={"block text-sm font-medium text-gray-700" + labelClassName}
+        >
           {displayLabel}
         </label>
       )}
@@ -127,18 +135,23 @@ export const ValueSelecterControl = ({
           inputClassName
         )}
       >
-        <option value="" disabled>
+        <option value="" disabled className={optionsClassName}>
           Select an option
         </option>
         {options.map((option) => (
-          <option key={option.value} value={option.value}>
+          <option
+            key={option.value}
+            value={option.value}
+            className={optionsClassName}
+          >
             {option.label}
           </option>
         ))}
       </select>
-      {touched?.[id] && errors?.[id] && (
-        <p className="text-sm text-red-500 mt-1">{errors[id]}</p>
-      )}
+      {touched?.[id] ||
+        (errors?.[id] && (
+          <p className="text-sm text-red-500 mt-1">{errors[id]}</p>
+        ))}
     </div>
   );
 };
@@ -283,6 +296,7 @@ export const TextAreaControl = ({
   touched,
   errors,
   rows = 4,
+  labelClassName = "",
 }) => {
   const displayLabel = ENABLE_TRANSLATION
     ? TranslationService.translate(translate_key, { defaultValue: label })
@@ -291,7 +305,10 @@ export const TextAreaControl = ({
   return (
     <div className={cn("mb-4 text-start", className)}>
       {label && (
-        <label htmlFor={id} className="block text-sm font-medium text-gray-700">
+        <label
+          htmlFor={id}
+          className={"block text-sm font-medium text-gray-700" + labelClassName}
+        >
           {displayLabel}
         </label>
       )}
@@ -310,7 +327,7 @@ export const TextAreaControl = ({
           inputClassName
         )}
       ></textarea>
-      {touched?.[id] && errors?.[id] && (
+      {touched?.[id] || errors?.[id] && (
         <p className="text-sm text-red-500 mt-1">{errors[id]}</p>
       )}
     </div>
@@ -383,8 +400,7 @@ export const FormButtonControl = ({
       disabled={isLoading || disabled}
       type={type}
       className={cn(
-        "w-full bg-teal-600 hover:bg-teal-700 text-white font-semibold py-2 px-4  flex items-center justify-center rounded-lg transition-colors",
-        buttonClassName
+        buttonClassName?buttonClassName: "w-full bg-teal-600 hover:bg-teal-700 text-white font-semibold py-2 px-4  flex items-center justify-center rounded-lg transition-colors"
       )}
     >
       {isLoading && (
@@ -421,7 +437,9 @@ export const ImageInputControl = ({
   disabled = false,
   setFieldValue,
   handleBlur,
-  refprop
+  refprop,
+  touched=null,
+  errors=null,
 }) => {
   const handleSingleFileChange = (e, setValue, valueName, callback = null) => {
     const file = e.target.files[0];
@@ -448,11 +466,13 @@ export const ImageInputControl = ({
         type="file"
         accept="image/jpeg, image/png"
         multiple={false}
-        onChange={(event) =>
-          handleSingleFileChange(event, setFieldValue, name)
-        }
+        onChange={(event) => handleSingleFileChange(event, setFieldValue, name)}
         onBlur={handleBlur}
       />
+      {touched?.[id] ||
+        (errors?.[id] && (
+          <p className="text-sm text-red-500 mt-1">{errors[id]}</p>
+        ))}
     </div>
   );
 };

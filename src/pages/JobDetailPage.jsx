@@ -35,6 +35,7 @@ import { formatDate, getEnumName } from "../utils/dateFormatter";
 import ShareDialog from "../components/dialogs/ShareDialog";
 import { JobCategories } from "../enums/Status";
 import AuthModal from "../components/AuthModal";
+import { RichContentControl } from "../shared/components/controls/RichContentControl";
 
 const JobDetailPage = () => {
   const job = useSelector((state) => state.jobhunting.job);
@@ -217,7 +218,12 @@ const JobDetailPage = () => {
                           Requirements
                         </h2>
                         <p className="text-gray-700 space-y-2">
-                          {job?.requirements}
+                          <RichContentControl
+                            isRead={true}
+                            name=""
+                            value={job?.requirements}
+                            setFieldValue={() => {}}
+                          />
                         </p>
 
                         {!job?.requirements && (
@@ -271,7 +277,12 @@ const JobDetailPage = () => {
                           Apply Instructions
                         </h2>
                         <p className="text-gray-700 space-y-2">
-                          {job?.appyInstructions}
+                        <RichContentControl
+                            isRead={true}
+                            name=""
+                            value={job?.appyInstructions}
+                            setFieldValue={() => {}}
+                          />
                         </p>
                       </div>
                     </div>

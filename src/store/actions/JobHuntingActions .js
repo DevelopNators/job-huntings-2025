@@ -7,6 +7,7 @@ import {
   SET_JOB_JOB_HUNTING_ACTION,
   SET_JOBS_BOOKJOB_HUNTING_ACTION,
   SET_SIMILAR_JOBS_JOB_HUNTING_ACTION,
+  SET_USER_POSTS_HUNTING_ACTION,
 } from "../const";
 
 import { toast } from "react-toastify";
@@ -171,7 +172,130 @@ export function getJobCategoryAction(data) {
       });
   };
 }
-
+export function getUserPostsAction(data) {
+  return (dispatch, getState) => {
+    const state = getState();
+    const userId = state.token?.decodedToken?.Id || null;
+    api
+      .getAll(Controllers.JobHunting, {...data,createdBy:userId}, "GetUserPosts")
+      .then((response) => {
+        dispatch(setUserPostsAction(response.data?.jobs));
+        dispatch(setRecordsConfigAction(response.data?.config));
+        dispatch(
+          setPageConfigTotalRecordsAction(response.data?.config?.recordsCount)
+        );
+      })
+      .catch((err) => {
+        toast.error(err.message + "!", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      });
+  };
+}
+export function removePostAction(
+  data = null,
+  callback = null,
+  finallyCallback = null
+) {
+  return (dispatch, getState) => {
+    api
+      .remove(Controllers.JobHunting, data, "DeletePost")
+      .then((response) => {
+        AlertPopUp(
+          response.status,
+          response.message,
+          "",
+          "Post deleted successfully"
+        );
+        dispatch(getUserPostsAction(null));
+        if (callback !== null && callback && typeof callback === "function") {
+          callback();
+        }
+      })
+      .catch((err) => {
+        return handleError(err, "removePostAction");
+      })
+      .finally(() => {
+        if (
+          finallyCallback !== null &&
+          finallyCallback &&
+          typeof finallyCallback === "function"
+        ) {
+          finallyCallback();
+        }
+      });
+  };
+}
+export function addPostAction(
+  data = null,
+  setSubmitting = null,
+  callback = null
+) {
+  return (dispatch, getState) => {
+    api
+      .add(Controllers.JobHunting, null, "AddPost", data)
+      .then((response) => {
+        AlertPopUp(response.status, response.message, "", "Bookmard add");
+        dispatch(getUserPostsAction(null)); // Store token in Redux and localStorage
+        if (callback !== null && callback && typeof callback === "function") {
+          callback();
+        }
+      })
+      .catch((err) => {
+        return handleError(err, "getProfileDetailsAction");
+      })
+      .finally(() => {
+        if (
+          setSubmitting !== null &&
+          setSubmitting &&
+          typeof setSubmitting === "function"
+        ) {
+          setSubmitting(false);
+        }
+      });
+  };
+}
+export function updatePostAction(
+  data = null,
+  setSubmitting = null,
+  callback = null
+)  {
+  return (dispatch, getState) => {
+    api
+      .update(Controllers.JobHunting, { id: data?.id }, "UpdatePost", data)
+      .then((response) => {
+        AlertPopUp(response.status, response.message, "", "Bookmard add");
+        dispatch(getUserPostsAction(null)); // Store token in Redux and localStorage
+        if (callback !== null && callback && typeof callback === "function") {
+          callback();
+        }
+      })
+      .catch((err) => {
+        return handleError(err, "getProfileDetailsAction");
+      })
+      .finally(() => {
+        if (
+          setSubmitting !== null &&
+          setSubmitting &&
+          typeof setSubmitting === "function"
+        ) {
+          setSubmitting(false);
+        }
+      });
+  };
+}
+export function setUserPostsAction(data) {
+  return {
+    type: SET_USER_POSTS_HUNTING_ACTION,
+    payload: data,
+  };
+}
 export function setJobsAction(data) {
   return {
     type: SET_JOBS_JOB_HUNTING_ACTION,

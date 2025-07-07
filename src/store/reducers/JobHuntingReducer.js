@@ -10,12 +10,16 @@ import {
   GET_JOBS_BOOKJOB_HUNTING_ACTION,
   SET_JOBS_BOOKJOB_HUNTING_ACTION,
   GET_SIMILAR_JOBS_JOB_HUNTING_ACTION,
-  SET_SIMILAR_JOBS_JOB_HUNTING_ACTION
+  SET_SIMILAR_JOBS_JOB_HUNTING_ACTION,
+  GET_USER_POSTS_HUNTING_ACTION,
+  SET_USER_POSTS_HUNTING_ACTION,
 } from "../const";
 
 const initialState = {
   jobs: [],
   featuredItems: [],
+  userPosts: [],
+
   similarItems: [],
   categories: [],
   job: {},
@@ -33,6 +37,16 @@ export function JobHuntingReducer(state = initialState, action) {
       return {
         ...state,
         jobs: action.payload,
+      };
+    case GET_USER_POSTS_HUNTING_ACTION:
+      return {
+        ...state,
+        userPosts: [],
+      };
+    case SET_USER_POSTS_HUNTING_ACTION:
+      return {
+        ...state,
+        userPosts: action.payload,
       };
     case GET_SIMILAR_JOBS_JOB_HUNTING_ACTION:
       return {

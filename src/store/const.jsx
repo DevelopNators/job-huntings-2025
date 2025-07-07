@@ -129,3 +129,6 @@ export const GET_JOB_JOB_HUNTING_ACTION = "[signup action] Get single job";
 export const SET_JOB_JOB_HUNTING_ACTION = "[signup action] Set single job";
 export const GET_PROFILE_ACTION = "[signup action] Get profile";
 export const SET_PROFILE_ACTION = "[signup action] Set profile";
+
+export const GET_USER_POSTS_HUNTING_ACTION = "[signup action] Get user posts";
+export const SET_USER_POSTS_HUNTING_ACTION = "[signup action] Set user posts";

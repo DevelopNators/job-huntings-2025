@@ -27,6 +27,9 @@ import {
   HelpCircle,
   MessageSquare,
   Trash,
+  LucideWorkflow,
+  PenTool,
+  ChevronRight,
 } from "lucide-react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -90,6 +93,8 @@ const profileSchema = Yup.object().shape({
 const ProfilePage = () => {
   const dispatch = useDispatch();
   const naigate = useNavigate();
+  const [showTips, setShowTips] = useState(true);
+  const toggleTips = () => setShowTips((prev) => !prev);
   const isAuthenticated = useSelector((state) => state.token.isAuthenticated);
   const user = useSelector((state) => state.auth.profile);
   const [activeTab, setActiveTab] = useState("profile");
@@ -107,10 +112,10 @@ const ProfilePage = () => {
   ];
   useEffect(() => {
     window.scrollTo(0, 0);
-    if (!isAuthenticated) {
-      naigate("/");
-      return;
-    }
+    // if (!isAuthenticated) {
+    //   naigate("/");
+    //   return;
+    // }
     dispatch(appProfileAction(null));
   }, [isAuthenticated]);
 
@@ -171,7 +176,6 @@ const ProfilePage = () => {
         }) => (
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Profile Header */}
-            <h1>{JSON.stringify(errors)}</h1>
             <Card>
               <CardContent className="p-6">
                 <div className="flex items-start space-x-6">
@@ -835,43 +839,76 @@ const ProfilePage = () => {
 
             <div className="flex flex-col lg:flex-row gap-8">
               {/* Sidebar */}
-              <div className="lg:w-64 flex-shrink-0">
-                <Card>
-                  <CardContent className="p-0">
-                    <nav className="space-y-1">
-                      {tabs.map((tab) => {
-                        const Icon = tab.icon;
-                        return (
-                          <button
-                            key={tab.id}
-                            onClick={() => setActiveTab(tab.id)}
-                            className={`w-full flex items-center px-4 py-3 text-left text-sm font-medium transition-colors ${
-                              activeTab === tab.id
-                                ? "bg-teal-50 text-teal-700 border-r-2 border-teal-500"
-                                : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
-                            }`}
-                          >
-                            <Icon className="w-5 h-5 mr-3" />
-                            {tab.label}
-                          </button>
-                        );
-                      })}
-
-                      <div className="border-t border-gray-200 mt-4 pt-4">
+              {showTips && (
+                <div className="lg:w-64 flex-shrink-0">
+                  <Card>
+                    <CardContent className="p-0">
+                      <nav className="space-y-1">
+                        {tabs.map((tab) => {
+                          const Icon = tab.icon;
+                          return (
+                            <>
+                              {" "}
+                              <button
+                                key={tab.id}
+                                onClick={() => setActiveTab(tab.id)}
+                                className={`w-full flex items-center px-4 py-3 text-left text-sm font-medium transition-colors ${
+                                  activeTab === tab.id
+                                    ? "bg-teal-50 text-teal-700 border-r-2 border-teal-500"
+                                    : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                                }`}
+                              >
+                                <Icon className="w-5 h-5 mr-3" />
+                                {tab.label}
+                              </button>
+                            </>
+                          );
+                        })}
                         <button
-                          onClick={handleLogout}
-                          className="w-full flex items-center px-4 py-3 text-left text-sm font-medium text-red-600 hover:bg-red-50 transition-colors"
+                          key={7}
+                          onClick={() => naigate("/manage-post")}
+                          className={`w-full flex items-center px-4 py-3 text-left text-sm font-medium transition-colors ${
+                            activeTab === 7
+                              ? "bg-teal-50 text-teal-700 border-r-2 border-teal-500"
+                              : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                          }`}
                         >
-                          <LogOut className="w-5 h-5 mr-3" />
-                          Sign Out
+                          <PenTool className="w-5 h-5 mr-3" />
+                          Manage Post
                         </button>
-                      </div>
-                    </nav>
-                  </CardContent>
-                </Card>
-              </div>
-
+                        <div className="border-t border-gray-200 mt-4 pt-4">
+                          <button
+                            onClick={() => naigate("/post")}
+                            className="w-full flex items-center px-4 py-3 text-left text-sm font-medium text-blue-600 hover:bg-red-50 transition-colors"
+                          >
+                            <LucideWorkflow className="w-5 h-5 mr-3" />
+                            Post a job
+                          </button>
+                          <button
+                            onClick={handleLogout}
+                            className="w-full flex items-center px-4 py-3 text-left text-sm font-medium text-red-600 hover:bg-red-50 transition-colors"
+                          >
+                            <LogOut className="w-5 h-5 mr-3" />
+                            Sign Out
+                          </button>
+                        </div>
+                      </nav>
+                    </CardContent>
+                  </Card>
+                </div>
+              )}
               {/* Main Content */}
+              <div className="relative">
+                {/* {!showTips && ( */}
+                  <button
+                    onClick={toggleTips}
+                    className="absolute -left-3 top-0 z-10 bg-teal-500 hover:bg-teal-600 rounded-full p-1"
+                    aria-label="Show Tips"
+                  >
+                    <ChevronRight className="w-5 h-5 text-white" />
+                  </button>
+                {/* )} */}
+              </div>
               <div className="flex-1">
                 {activeTab === "profile" && renderProfileTab()}
                 {activeTab === "preferences" && renderPreferencesTab()}
@@ -879,7 +916,7 @@ const ProfilePage = () => {
                 {activeTab === "privacy" && renderPrivacyTab()}
                 {activeTab === "documents" && renderDocumentsTab()}
                 {activeTab === "account" && renderAccountTab()}
-              </div>
+              </div>{" "}
             </div>
           </div>
         </Container>

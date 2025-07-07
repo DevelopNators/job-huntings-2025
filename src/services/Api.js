@@ -47,7 +47,7 @@ const add = async (controller, req = null,endPoint="Add", payload = {}) => {
     return handleError(error, "update");
   }
 };
-const update = async (controller, req = null,endPoint="Add", payload = {}) => {
+const update = async (controller, req = null,endPoint="Update", payload = {}) => {
   try {
     let url = `${controller}/${endPoint}`;
     url += buildQueryParams(req);
