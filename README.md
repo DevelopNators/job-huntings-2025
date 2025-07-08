@@ -1096,7 +1096,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📞 Support
 
 For support and questions:
-- **Email**: support@jobhuntings.com
+- **Email**: developnators@gmail.com
 - **Documentation**: [docs.jobhuntings.com](https://docs.jobhuntings.com)
 - **SEO Guide**: [seo.jobhuntings.com](https://seo.jobhuntings.com)
 - **Issues**: [GitHub Issues](https://github.com/jobhuntings/issues)
